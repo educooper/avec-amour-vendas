@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Criar Pedido</title>
+    <style>
+        form {
+            margin: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            margin-bottom: 10px;
+            width: 300px;
+        }
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Cadastrar Pedido</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <h3>Cliente</h3>
+        {{ cliente_form.as_p }}
+        
+        <h3>Endereço</h3>
+        {{ endereco_formset.management_form }}
+        {{ endereco_formset.as_p }}
+
+        <!-- Renderizando os campos do formulário -->
+        {{ pedido_form.non_field_errors }}
+        
+        <!-- Renderizando os outros campos normalmente -->
+        {{ pedido_form.cliente.label_tag }} {{ pedido_form.cliente }}
+        {{ pedido_form.pagamento.label_tag }} {{ pedido_form.pagamento }}
+        {{ pedido_form.qtd_item.label_tag }} {{ pedido_form.qtd_item }}
+        {{ pedido_form.valor_total.label_tag }} {{ pedido_form.valor_total }}
+        
+        <!-- Renderizando o campo de múltipla escolha (itens) com caixas de seleção -->
+        <div class="checkbox-list">
+            {{ pedido_form.itens.label_tag }}
+            {{ pedido_form.itens }}
+        </div>
+
+        <h3>Pagamento</h3>
+        {{ pagamento_form.as_p }}
+        
+        <h3>Pedido</h3>
+        {{ pedido_form.as_p }}
+        
+        <button type="submit">Salvar Pedido</button>
+    </form>
+</body>
+</html>
