@@ -34,12 +34,13 @@
         {{ pedido_form.non_field_errors }}
         
         <!-- Renderizando os outros campos normalmente -->
-        {{ pedido_form.cliente.label_tag }} {{ pedido_form.cliente }}
+        <!-- {{ pedido_form.cliente.label_tag }} {{ pedido_form.cliente }} -->
         {{ pedido_form.pagamento.label_tag }} {{ pedido_form.pagamento }}
         {{ pedido_form.qtd_item.label_tag }} {{ pedido_form.qtd_item }}
-        {{ pedido_form.valor_total.label_tag }} {{ pedido_form.valor_total }}
+        <!-- {{ pedido_form.valor_total.label_tag }} {{ pedido_form.valor_total }} -->
         
         <!-- Renderizando o campo de múltipla escolha (itens) com caixas de seleção -->
+
         <div class="checkbox-list">
             {{ pedido_form.itens.label_tag }}
             {{ pedido_form.itens }}
@@ -48,8 +49,8 @@
         <h3>Pagamento</h3>
         {{ pagamento_form.as_p }}
         
-        <h3>Pedido</h3>
-        {{ pedido_form.as_p }}
+        <!--<h3>Pedido</h3> -->
+        <!--{{ pedido_form.as_p }} -->
         
         <button type="submit">Salvar Pedido</button>
     </form>

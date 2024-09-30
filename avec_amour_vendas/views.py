@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import ClienteForm, PagamentoForm, PedidoForm, ClienteFormSet, ItemForm
-from .models import Pedido, Cliente
+from .models import Pedido, Cliente, Item
 
 def criar_pedido(request):
     if request.method == 'POST':
@@ -44,4 +44,10 @@ def cadastrar_item(request):
         form = ItemForm()
 
     return render(request, 'cadastrar_item.html', {'form': form})
+
+def lista_itens(request):
+    itens = Item.objects.all()  # Busca todos os itens no banco de dados
+    return render(request, 'lista_itens.html', {'itens': itens})
+
+
 
