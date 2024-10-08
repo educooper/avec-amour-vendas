@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
     <title>Criar Pedido</title>
     <style>
         form {
-            margin: 20px;
+            margin: 5px;
         }
         label {
             display: block;
-            margin-top: 10px;
+            margin-top: 8px;
         }
         input, select {
-            margin-bottom: 10px;
-            width: 300px;
+            margin-bottom: 8px;
+            width: 380px;
         }
         button {
-            margin-top: 10px;
+            margin-top: 8px;
         }
     </style>
 </head>
@@ -25,34 +27,60 @@
         {% csrf_token %}
         <h3>Cliente</h3>
         {{ cliente_form.as_p }}
+        {{ cliente_form.errors }}
+
         
         <h3>Endereço</h3>
-        {{ endereco_formset.management_form }}
-        {{ endereco_formset.as_p }}
-
-        <!-- Renderizando os campos do formulário -->
-        {{ pedido_form.non_field_errors }}
+        <!-- {% for form in endereco_formset %}        {{ form.non_field_errors }}        {{ form.id }}
+        -->
         
+        <!-- Renderizar os campos do formulário de endereço, exceto o checkbox de DELETE -->
+        <!-- {% for hidden in form.hidden_fields %}            {{ hidden }}        {% endfor %}
+        {% for field in form.visible_fields %}            {% if field.name != "DELETE" %}
+                {{ field }}            {% endif %}        {% endfor %}        {% endfor %}
+        -->
+
+        {{ endereco_formset.management_form }} 
+        {{ endereco_formset.as_p }}
+        {{ endereco_formset.errors }}
+
         <!-- Renderizando os outros campos normalmente -->
         <!-- {{ pedido_form.cliente.label_tag }} {{ pedido_form.cliente }} -->
-        {{ pedido_form.pagamento.label_tag }} {{ pedido_form.pagamento }}
-        {{ pedido_form.qtd_item.label_tag }} {{ pedido_form.qtd_item }}
-        <!-- {{ pedido_form.valor_total.label_tag }} {{ pedido_form.valor_total }} -->
-        
+        <!-- {{ pedido_form.pagamento.label_tag }} {{ pedido_form.pagamento }} -->
+
         <!-- Renderizando o campo de múltipla escolha (itens) com caixas de seleção -->
-
-        <div class="checkbox-list">
-            {{ pedido_form.itens.label_tag }}
-            {{ pedido_form.itens }}
-        </div>
-
+        <h3>Itens</h3>
+        <p>
+            {{ pedido_form.itens.label_tag }} {{ pedido_form.itens }}
+        </p>
+        <!-- {{ pedido_form.quantidade.label_tag }} {{ pedido_form.quantidade }} -->
+<!-- Adicionado 'tipo_frete valor_frete status_frete valor_total e canal_venda -->
+        <h3>Frete</h3>
+        {{ pedido_form.tipo_frete.label_tag }} {{ pedido_form.tipo_frete }}
+        {{ pedido_form.valor_frete.label_tag }} {{ pedido_form.valor_frete }}
+        {{ pedido_form.status_frete.label_tag }} {{ pedido_form.status_frete }}
+        {{ pedido_form.rastreio_frete.label_tag }} {{ pedido_form.rastreio_frete }}
+        
         <h3>Pagamento</h3>
+
         {{ pagamento_form.as_p }}
-        
-        <!--<h3>Pedido</h3> -->
-        <!--{{ pedido_form.as_p }} -->
-        
-        <button type="submit">Salvar Pedido</button>
+        {{ pagamento_form.errors }}
+        <!-- VALOR TOTAL -->
+
+        {{ pedido_form.valor_total.label_tag }} {{ pedido_form.valor_total }}
+        {{ pedido_form.canal_venda.label_tag }} {{ pedido_form.canal_venda }}
+               
+        <!-- Renderizando os campos do formulário -->
+        {{ pedido_form.non_field_errors }}    
+        {{ pedido_form.errors }}
+        <!--Pedido--  não apagar - esta linha que salva - faz o UPDATE -->
+        <!-- {{ pedido_form.as_p }} -->
+
+
+        <!-- <link rel="icon" type="image/x-icon" href="img/favicon.ico"> -->
+        <p>
+            <button type="submit">Salvar Pedido</button>
+        </p>
     </form>
 </body>
 </html>

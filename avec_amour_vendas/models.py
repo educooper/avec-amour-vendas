@@ -50,11 +50,11 @@ class Item(models.Model):
         return self.descricao
 
 class Pedido(models.Model):
-    cliente = models.ForeignKey(Cliente, on_delete=models.PROTECT)
-    item = models.ForeignKey(Item, on_delete=models.PROTECT)
+    cliente = models.ForeignKey(Cliente, on_delete=models.SET_NULL, null=True, blank=True)
+    itens = models.ManyToManyField(Item, related_name='pedidos')   #item = models.ForeignKey(Item, on_delete=models.PROTECT)
     quantidade = models.PositiveIntegerField(default=1)
-    valor_frete = models.DecimalField(max_digits=7, decimal_places=2)
-    valor_total = models.DecimalField(max_digits=7, decimal_places=2)
+    valor_frete = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
+    valor_total = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
     data_pedido = models.DateTimeField(auto_now_add=True)
     canal_venda = models.CharField(max_length=28)
     tipo_frete = models.CharField(max_length=32)
@@ -72,7 +72,7 @@ class Pagamento(models.Model):
     tipo = models.CharField(max_length=18)
     sinal = models.DecimalField(max_digits=10, decimal_places=2)
     total = models.DecimalField(max_digits=10, decimal_places=2)
-    status = models.BooleanField(default=True)
+    status = models.CharField(max_length=18)
     dta_cadastro = models.DateTimeField(auto_now_add=True)
     dta_atualizacao = models.DateTimeField(auto_now=True)
 

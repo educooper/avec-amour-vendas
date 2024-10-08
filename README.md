@@ -34,3 +34,12 @@ python3 manage.py migrate
 python manage.py runserver
 
 deactivate
+
+
+Token
+Kangu
+ Caso possamos calular o frete posteriormente...
+
+ 43610f9e6e7f06eff89b28c6267d097f0fbb8c7e570dcb794fee177643ce506d43610f9e6e7f06eff89b28c6267d097f0fbb8c7e570dcb794fee177643ce506d
+
+ Fonte : https://portal.kangu.com.br/ged/documento/download-file/hash/file_OUdVdUMyc3hQZ0ZIaDByWjg2RE9WQWt1eGJMM2FIQkNXNy91a3VQWmhoUT0=/Documentac_a_o_da_API_Kangu.pdf 

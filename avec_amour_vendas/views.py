@@ -13,13 +13,19 @@ def criar_pedido(request):
             cliente = cliente_form.save()
             endereco_formset.instance = cliente
             endereco_formset.save()
-            pagamento = pagamento_form.save()
+
             pedido = pedido_form.save(commit=False)
             pedido.cliente = cliente
-            pedido.pagamento = pagamento
             pedido.save()
+
+            pagamento = pagamento_form.save(commit=False)
+            pagamento.pedido = pedido  # Associa o pagamento ao pedido
+            pagamento.save()
+
             pedido_form.save_m2m()  # Salva os itens selecionados
+            
             return redirect('lista_pedidos')
+
     else:
         cliente_form = ClienteForm()
         endereco_formset = ClienteFormSet()
@@ -33,6 +39,11 @@ def criar_pedido(request):
         'pedido_form': pedido_form,
     })
 
+
+def lista_pedidos(request):
+    pedidos = Pedido.objects.all()  # Busca todos os pedidos no banco de dados
+    return render(request, 'lista_pedidos.html', {'pedidos': pedidos})
+    
 
 def cadastrar_item(request):
     if request.method == 'POST':
