@@ -28,7 +28,7 @@ STATUS_FRETE_CHOICES = [
 class EnderecoForm(forms.ModelForm):
     class Meta:
         model = Endereco
-        fields = ['cep', 'rua', 'numero', 'complemento', 'cidade', 'estado']
+        fields = ['cep', 'rua', 'numero', 'complemento', 'bairro', 'cidade', 'estado']
         apagar = forms.BooleanField(widget=forms.HiddenInput(), required=False) # ocultando campo bool APAGAR
 
 class ClienteForm(forms.ModelForm):
@@ -64,7 +64,7 @@ class PedidoForm(forms.ModelForm):
     )
     class Meta:
         model = Pedido
-        fields = ['tipo_frete','valor_frete','status_frete','rastreio_frete','valor_total','canal_venda']
+        fields = ['itens','tipo_frete','valor_frete','status_frete','rastreio_frete','valor_total','canal_venda']
 
 # Formset para o Cliente e Endereço -    //  'cliente', 'itens'  , 'quantidade',
 ClienteFormSet = inlineformset_factory(

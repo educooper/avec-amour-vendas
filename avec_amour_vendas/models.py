@@ -1,4 +1,5 @@
 from django.db import models
+from simplecep.fields import CEPField
 
 class Cliente(models.Model):
     nome = models.CharField(max_length=72)
@@ -21,16 +22,17 @@ class Endereco(models.Model):
     rua = models.CharField(max_length=96)
     numero = models.CharField(max_length=10)
     complemento = models.CharField(max_length=10, blank=True, null=True)
+    bairro = models.CharField(max_length=96)
     cidade = models.CharField(max_length=100)
-    estado = models.CharField(max_length=50)
-    cep = models.CharField(max_length=9)
+    estado = models.CharField(max_length=2)
+    models.CharField(max_length=9) # models.CharField(max_length=9) #cep = CEPField()  # Campo de CEP da biblioteca
     ativo = models.BooleanField(default=True)
     dta_cadastro = models.DateTimeField(auto_now_add=True)
     dta_atualizacao = models.DateTimeField(auto_now=True)
     tipo = models.CharField(max_length=20)
 
     def __str__(self):
-        return f"{self.tipo} - {self.rua}, {self.numero}, {self.complemento}, {self.cidade}, {self.estado} - {self.cep}"
+        return f"{self.tipo} - {self.rua}, {self.numero}, {self.complemento}, {self.bairro}, {self.cidade}, {self.estado} - {self.cep}"
 
 
 class Item(models.Model):

@@ -10,18 +10,36 @@ def criar_pedido(request):
         pedido_form = PedidoForm(request.POST)
         
         if cliente_form.is_valid() and endereco_formset.is_valid() and pagamento_form.is_valid() and pedido_form.is_valid():
+            # Verifica se o cliente já existe com base no e-mail
+            email = cliente_form.cleaned_data.get('email')
+            cliente = Cliente.objects.filter(email=email).first()
+
+            if cliente is None:
+                # Se não existir, cria o cliente
+                cliente = cliente_form.save()
+                endereco_formset.instance = cliente
+                endereco_formset.save()
+            else:
+                # Se o cliente já existe, apenas atualiza o endereço
+                endereco_formset.instance = cliente
+                endereco_formset.save()
+            
+            # Salvando o cliente e endereço
             cliente = cliente_form.save()
             endereco_formset.instance = cliente
             endereco_formset.save()
 
+            # Salvando o pedido (sem itens ainda)
             pedido = pedido_form.save(commit=False)
             pedido.cliente = cliente
             pedido.save()
 
+            # Salvando o pagamento associado ao pedido
             pagamento = pagamento_form.save(commit=False)
             pagamento.pedido = pedido  # Associa o pagamento ao pedido
             pagamento.save()
 
+            # Agora salvando a relação ManyToMany com os itens
             pedido_form.save_m2m()  # Salva os itens selecionados
             
             return redirect('lista_pedidos')
