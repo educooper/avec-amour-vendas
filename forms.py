@@ -24,7 +24,22 @@ STATUS_FRETE_CHOICES = [
         ('extraviado', 'Extraviado'),
         ('entregue', 'Entregue'),
     ]
-
+STATUS_PAGAMENTO_CHOICES = [
+        ('processando', 'Processando'),
+        ('pendente', 'Pendente'),
+        ('recusado', 'Recusado'),
+        ('sinal_pago', 'Sinal_Pago'),
+        ('pago', 'Pago'),
+    ]
+TIPO_PAGAMENTO_CHOICES = [
+        ('pix', 'PIX'),
+        ('picpay', 'PicPay'),
+        ('recargapay', 'RecargaPay'),
+        ('whatsapp', 'WhatsApp'),
+        ('mercadopago', 'MercadoPago'),
+        ('cartao', 'Cartao'),
+        ('dinheiro', 'Dinheiro'),
+    ]
 class EnderecoForm(forms.ModelForm):
     class Meta:
         model = Endereco
@@ -37,6 +52,14 @@ class ClienteForm(forms.ModelForm):
         fields = ['nome', 'email', 'telefone', 'cpf','instagram','telegram']
 
 class PagamentoForm(forms.ModelForm):
+    tipo = forms.ChoiceField(
+        choices=TIPO_PAGAMENTO_CHOICES, 
+        widget=forms.Select(attrs={'class': 'form-control'}),
+    )
+    status = forms.ChoiceField(
+        choices=STATUS_PAGAMENTO_CHOICES, 
+        widget=forms.Select(attrs={'class': 'form-control'}),
+    )
     class Meta:
         model = Pagamento
         fields = ['tipo', 'sinal', 'total', 'status']
@@ -62,6 +85,7 @@ class PedidoForm(forms.ModelForm):
         choices=STATUS_FRETE_CHOICES, 
         widget=forms.Select(attrs={'class': 'form-control'}),
     )
+
     class Meta:
         model = Pedido
         fields = ['itens','tipo_frete','valor_frete','status_frete','rastreio_frete','valor_total','canal_venda']
