@@ -15,8 +15,8 @@
             <h1>Pedidos Realizados</h1>
             <p>Veja a lista de pedidos realizados e gerencie suas ações.</p>
         </div>
-        <div class="table-responsive">
-            <table class="table">
+        <div class="item-card">
+            <table class="item-info">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -25,7 +25,6 @@
                         <th>Itens</th>
                         <th>Total</th>
                         <th>Status</th>
-                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,10 +32,10 @@
                     <tr>
                         <td>{{ forloop.counter }}</td>
                         <td>{{ pedido.cliente }}</td>
-                        <td>{{ pedido.data|date:"d/m/Y" }}</td>
+                        <td>{{ pedido.data_pedido|date:"d/m/Y" }}</td>
                         <td>{{ pedido.itens.count }}</td>
                         <td>R$ {{ pedido.valor_total|floatformat:2 }}</td>
-                        <td>{{ pedido.status }}</td>
+                        <td>{{ pedido.status_pedido }}</td>
                     </tr>
                     {% empty %}
                     <tr>
