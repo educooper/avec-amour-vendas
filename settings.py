@@ -96,15 +96,27 @@ WSGI_APPLICATION = 'avec_amour_vendas.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {  
-    'default': {  
-        'ENGINE': 'django.db.backends.mysql',  
-        'NAME': 'avec_amour_vendas',  
-        'USER':'root',  
-        'PASSWORD':'',  
-        'HOST':'localhost',  
-        'PORT':'3306'  
-    }  
+#DATABASES = {  
+#    'default': {  
+#        'ENGINE': 'django.db.backends.mysql',  
+#        'NAME': 'avec_amour_vendas',  
+#        'USER':'root',  
+#        'PASSWORD':'',  
+#        'HOST':'localhost',  
+#        'PORT':'3306'  
+#    }  
+#}
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'avecamour$atelier',
+        'USER':'avecamour',
+        'PASSWORD':'Univesp!@#$',
+        'HOST':'avecamour.mysql.pythonanywhere-services.com',
+        'PORT':'3306'
+    }
 }
 
 
@@ -143,6 +155,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = '/home/avecamour/avec_amour_vendas/static'
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
